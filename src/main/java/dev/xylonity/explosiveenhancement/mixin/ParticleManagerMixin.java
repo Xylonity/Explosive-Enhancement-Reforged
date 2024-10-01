@@ -58,11 +58,8 @@ public class ParticleManagerMixin implements IExplosiveParticleHandler {
             if (particleProvider != null) {
                 Particle particle = particleProvider.createParticle(pParticleData, this.level, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
                 cir.setReturnValue(particle);
-            } else {
-                cir.setReturnValue(null);
             }
 
-            cir.cancel();
         }
     }
 
