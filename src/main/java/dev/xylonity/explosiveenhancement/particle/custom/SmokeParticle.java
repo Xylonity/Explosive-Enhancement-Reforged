@@ -16,7 +16,7 @@ public class SmokeParticle extends TextureSheetParticle {
         super(world, x, y, z);
         this.friction = 0.6F;
         this.sprites = spriteProvider;
-        this.lifetime = this.random.nextInt(35);
+        this.lifetime = this.random.nextInt(35) + 1;
         if(velZ == 0) {
             quadSize = (float) velX * 0.25f;
             this.lifetime += (int) (velX * this.random.nextInt(3, 22));
