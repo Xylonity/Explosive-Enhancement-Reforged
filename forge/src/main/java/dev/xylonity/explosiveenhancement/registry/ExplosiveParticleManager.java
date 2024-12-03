@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 /**
  * Defines a custom registry for particle types using DeferredRegister.
- * The `PARTICLE_TYPES` supplier holds the registry for `ParticleType<?>` instances,
+ * The `PARTICLE_TYPES` supplier holds the registry for `ParticleType` instances,
  * and `PARTICLE_REGISTER` manages the deferred registration process. The `setup`
  * method initializes the registry and registers all custom particles in the
  * event bus, ensuring that they are properly integrated within the mod's lifecycle.
