@@ -57,7 +57,7 @@ public class ExplosiveEnhancementConfig {
         modEnabled = BUILDER.comment("Enable the mod").define("modEnabled", true);
         emissiveExplosion = BUILDER.comment("Enable emissive explosion effects").define("emissiveExplosion", true);
         emissiveWaterExplosion = BUILDER.comment("Enable emissive water explosion effects").define("emissiveWaterExplosion", true);
-        alwaysShow = BUILDER.comment("Always show explosion effects").define("alwaysShow", false);
+        alwaysShow = BUILDER.comment("Always show explosion effects").define("alwaysShow", true);
         debugLogs = BUILDER.comment("Enable debug logs").define("debugLogs", false);
 
         BUILDER.pop();
