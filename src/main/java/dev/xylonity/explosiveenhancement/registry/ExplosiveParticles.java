@@ -1,12 +1,18 @@
 package dev.xylonity.explosiveenhancement.registry;
 
+import dev.xylonity.explosiveenhancement.ExplosiveEnhancement;
 import dev.xylonity.explosiveenhancement.particle.custom.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ExplosiveParticles {
+
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(Registries.PARTICLE_TYPE, ExplosiveEnhancement.MOD_ID);
 
     public static final RegistryObject<SimpleParticleType> BLASTWAVE = register("blastwave");
     public static final RegistryObject<SimpleParticleType> FIREBALL = register("fireball");
@@ -20,23 +26,20 @@ public class ExplosiveParticles {
     public static final RegistryObject<SimpleParticleType> UNDERWATERSPARKS = register("underwatersparks");
 
     public static void registerProviders(final RegisterParticleProvidersEvent event) {
-        IExplosiveParticleHandler manager = ((IExplosiveParticleHandler) Minecraft.getInstance().particleEngine);
-        manager.registerMutableSprite(BLASTWAVE, BlastWaveParticle.Provider::new);
-        manager.registerMutableSprite(FIREBALL, FireballParticle.Provider::new);
-        manager.registerMutableSprite(BLANK_FIREBALL, FireballParticle.Provider::new);
-        manager.registerMutableSprite(SMOKE, SmokeParticle.Provider::new);
-        manager.registerMutableSprite(SPARKS, SparksParticle.Provider::new);
-        manager.registerMutableSprite(BUBBLE, BubbleParticle.Provider::new);
-        manager.registerMutableSprite(SHOCKWAVE, ShockwaveParticle.Provider::new);
-        manager.registerMutableSprite(BLANK_SHOCKWAVE, ShockwaveParticle.Provider::new);
-        manager.registerMutableSprite(UNDERWATERBLASTWAVE, UnderwaterBlastwaveParticle.Provider::new);
-        manager.registerMutableSprite(UNDERWATERSPARKS, UnderwaterSparksParticle.Provider::new);
+        event.registerSpriteSet(BLASTWAVE.get(), BlastWaveParticle.Provider::new);
+        event.registerSpriteSet(FIREBALL.get(), FireballParticle.Provider::new);
+        event.registerSpriteSet(BLANK_FIREBALL.get(), FireballParticle.Provider::new);
+        event.registerSpriteSet(SMOKE.get(), SmokeParticle.Provider::new);
+        event.registerSpriteSet(SPARKS.get(), SparksParticle.Provider::new);
+        event.registerSpriteSet(BUBBLE.get(), BubbleParticle.Provider::new);
+        event.registerSpriteSet(SHOCKWAVE.get(), ShockwaveParticle.Provider::new);
+        event.registerSpriteSet(BLANK_SHOCKWAVE.get(), ShockwaveParticle.Provider::new);
+        event.registerSpriteSet(UNDERWATERBLASTWAVE.get(), UnderwaterBlastwaveParticle.Provider::new);
+        event.registerSpriteSet(UNDERWATERSPARKS.get(), UnderwaterSparksParticle.Provider::new);
     }
 
-    public static void init() {}
-
     private static RegistryObject<SimpleParticleType> register(String name) {
-        return ExplosiveParticleManager.PARTICLE_REGISTER.register(name, () -> new SimpleParticleType(false));
+        return PARTICLES.register(name, () -> new SimpleParticleType(false));
     }
 
 }
