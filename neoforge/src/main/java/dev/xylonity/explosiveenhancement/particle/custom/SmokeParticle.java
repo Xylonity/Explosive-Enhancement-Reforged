@@ -82,7 +82,12 @@ public class SmokeParticle extends TextureSheetParticle {
         public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
                                        double x, double y, double z,
                                        double dx, double dy, double dz) {
-            return new SmokeParticle(level, x, y, z, this.sprites, dx, dy, dz);
+            try {
+                return new SmokeParticle(level, x, y, z, this.sprites, dx, dy, dz);
+            } catch (Exception e) {
+                return null;
+            }
+
         }
     }
 
