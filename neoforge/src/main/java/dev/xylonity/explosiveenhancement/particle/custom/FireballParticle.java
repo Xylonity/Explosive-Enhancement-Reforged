@@ -36,7 +36,7 @@ public class FireballParticle extends TextureSheetParticle {
             this.yd -= (double)this.gravity;
             this.move(this.xd, this.yd, this.zd);
             if(this.age >= this.lifetime * 0.65 && ExplosiveValues.showSparks) {
-                this.level.addParticle(ExplosiveParticles.SPARKS.get(), important, this.x, this.y, this.z, quadSize, this.yd, this.zd);
+                this.level.addParticle(ExplosiveParticles.SPARKS.get(), true, important, this.x, this.y, this.z, quadSize, this.yd, this.zd);
             }
             this.setSpriteFromAge(this.sprites);
         }
@@ -52,6 +52,7 @@ public class FireballParticle extends TextureSheetParticle {
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
+
     @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;

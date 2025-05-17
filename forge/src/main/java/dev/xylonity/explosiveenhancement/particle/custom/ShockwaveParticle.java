@@ -33,7 +33,7 @@ public class ShockwaveParticle extends TextureSheetParticle {
             this.yd -= (double)this.gravity;
             this.move(this.xd, this.yd, this.zd);
             if(this.age >= this.lifetime * 0.65 && ExplosiveValues.showUnderwaterSparks) {
-                this.level.addParticle(ExplosiveParticles.UNDERWATERSPARKS.get(), important, this.x, this.y, this.z, quadSize, this.yd, this.zd);
+                this.level.addParticle(ExplosiveParticles.UNDERWATERSPARKS.get(), true, important, this.x, this.y, this.z, quadSize, this.yd, this.zd);
             }
             this.setSpriteFromAge(this.sprites);
         }
@@ -48,6 +48,7 @@ public class ShockwaveParticle extends TextureSheetParticle {
     protected int getLightColor(float pPartialTick) {
         return ExplosiveValues.emissiveWaterExplosion ? 15728880 : super.getLightColor(pPartialTick);
     }
+
     @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;

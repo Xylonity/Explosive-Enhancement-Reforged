@@ -1,11 +1,11 @@
 package dev.xylonity.explosiveenhancement.api;
 
 import dev.xylonity.explosiveenhancement.ExplosiveHandler;
-import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 public class ExplosiveConfig {
 
-    static void spawnParticles(Level world, double x, double y, double z, float power) {
+    static void spawnParticles(ServerLevel world, double x, double y, double z, float power) {
         spawnParticles(world, x, y, z, power, false, true, false);
     }
 
@@ -20,7 +20,7 @@ public class ExplosiveConfig {
      * @param isUnderWater Show the underwater effect
      * @param didDestroyBlocks Helps to determine the particle type for the vanilla particles
      */
-    public static void spawnParticles(Level world, double x, double y, double z, float power, boolean isUnderWater, boolean didDestroyBlocks) {
+    public static void spawnParticles(ServerLevel world, double x, double y, double z, float power, boolean isUnderWater, boolean didDestroyBlocks) {
         spawnParticles(world, x, y, z, power, isUnderWater, didDestroyBlocks, false);
     }
 
@@ -35,7 +35,7 @@ public class ExplosiveConfig {
      * @param didDestroyBlocks Helps to determine the particle type for the vanilla particles
      * @param isImportant Renders the effect from far away AND on lower particle settings. If true, the user's config option for this specific option is ignored, otherwise, it defaults to the user's config.
      */
-    static void spawnParticles(Level world, double x, double y, double z, float power, boolean isUnderWater, boolean didDestroyBlocks, boolean isImportant) {
+    public static void spawnParticles(ServerLevel world, double x, double y, double z, float power, boolean isUnderWater, boolean didDestroyBlocks, boolean isImportant) {
         ExplosiveHandler.spawnParticles(world, x, y, z, power, isUnderWater, didDestroyBlocks, isImportant);
     }
 

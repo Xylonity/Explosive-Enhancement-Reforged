@@ -71,6 +71,7 @@ public class SmokeParticle extends TextureSheetParticle {
             return super.getLightColor(tint);
         }
     }
+
     @OnlyIn(Dist.CLIENT)
     public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
