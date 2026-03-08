@@ -18,7 +18,8 @@ public class ExplosiveHandler {
 
         if (isUnderWater) {
             power = ExplosiveValues.dynamicUnderwater ? power : 4;
-        } else {
+        }
+        else {
             power = ExplosiveValues.dynamicSize ? power : 4;
         }
 
@@ -46,39 +47,49 @@ public class ExplosiveHandler {
                 send.accept(ExplosiveParticles.UNDERWATERBLASTWAVE.get(),
                         new Vec3(blastwavePower, 0, 0));
             }
+
             if (ExplosiveValues.showShockwave) {
                 send.accept(ExplosiveParticles.SHOCKWAVE.get(),
                         new Vec3(fireballPower, isImportant ? 1 : 0, 0));
-            } else if (ExplosiveValues.showUnderwaterSparks) {
+            }
+            else if (ExplosiveValues.showUnderwaterSparks) {
                 send.accept(ExplosiveParticles.BLANK_SHOCKWAVE.get(),
                         new Vec3(fireballPower, isImportant ? 1 : 0, 0));
             }
+
             for (int i = 0; i < ExplosiveValues.bubbleAmount; i++) {
                 Vec3 v = new Vec3(
                         nextBetween(-7, 7) * 0.3,
                         nextBetween(1, 10) * 0.1,
                         nextBetween(-7, 7) * 0.3
                 );
+
                 send.accept(ExplosiveParticles.BUBBLE.get(), v);
             }
+
             if (ExplosiveValues.showDefaultExplosionUnderwater) {
                 showDefaultParticles(world, x, y, z, power, didDestroyBlocks, isImportant);
             }
-        } else {
+        }
+        else {
             if (ExplosiveValues.debugLogs) {
                 ExplosiveEnhancement.LOGGER.info("Particle is being shown!");
             }
+
             if (ExplosiveValues.showBlastWave) {
                 send.accept(ExplosiveParticles.BLASTWAVE.get(),
                         new Vec3(blastwavePower, 0, 0));
             }
+
             if (ExplosiveValues.showFireball) {
                 send.accept(ExplosiveParticles.FIREBALL.get(),
                         new Vec3(fireballPower, isImportant ? 1 : 0, 0));
-            } else if (ExplosiveValues.showSparks) {
+            }
+            else if (ExplosiveValues.showSparks) {
                 send.accept(ExplosiveParticles.BLANK_FIREBALL.get(),
                         new Vec3(fireballPower, isImportant ? 1 : 0, 0));
             }
+
             if (ExplosiveValues.showMushroomCloud) {
                 send.accept(ExplosiveParticles.SMOKE.get(), new Vec3(power, smokePower, 0));
                 send.accept(ExplosiveParticles.SMOKE.get(), new Vec3(power, power * 0.25, 0));
@@ -87,6 +98,7 @@ public class ExplosiveHandler {
                 send.accept(ExplosiveParticles.SMOKE.get(), new Vec3(power, smokePower,  0.15));
                 send.accept(ExplosiveParticles.SMOKE.get(), new Vec3(power, smokePower, -0.15));
             }
+
             if (ExplosiveValues.showDefaultExplosion) {
                 showDefaultParticles(world, x, y, z, power, didDestroyBlocks, isImportant);
             }
@@ -98,9 +110,7 @@ public class ExplosiveHandler {
     }
 
     private static void showDefaultParticles(ServerLevel world, double x, double y, double z, float power, boolean didDestroyBlocks, boolean isImportant) {
-
         ParticleOptions type = (! (power < 2.0f) && didDestroyBlocks) ? ParticleTypes.EXPLOSION_EMITTER : ParticleTypes.EXPLOSION;
-
         world.sendParticles(type, isImportant, isImportant, x, y, z, 1, 0, 0, 0, 0);
     }
 

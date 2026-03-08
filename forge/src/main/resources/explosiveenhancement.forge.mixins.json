@@ -4,9 +4,12 @@
   "package": "dev.xylonity.explosiveenhancement.mixin",
   "compatibilityLevel": "JAVA_18",
   "mixins": [
-    "ExplosionMixin"
+    "ExplosionMixin",
+    "ExplosionPacketMixin",
+    "ServerExplosionAccessor"
   ],
-  "client": [],
+  "client": [
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

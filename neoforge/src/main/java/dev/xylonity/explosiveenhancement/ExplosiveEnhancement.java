@@ -16,7 +16,7 @@ public class ExplosiveEnhancement {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ExplosiveEnhancement(IEventBus bus, ModContainer ctx) {
-        ctx.registerConfig(ModConfig.Type.CLIENT, ExplosiveEnhancementConfig.SPEC, "explosiveenhancement.toml");
+        ctx.registerConfig(ModConfig.Type.COMMON, ExplosiveEnhancementConfig.SPEC, "explosiveenhancement.toml");
 
         ExplosiveParticles.init(bus);
     }

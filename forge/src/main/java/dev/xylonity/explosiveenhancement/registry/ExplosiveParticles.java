@@ -3,14 +3,14 @@ package dev.xylonity.explosiveenhancement.registry;
 import dev.xylonity.explosiveenhancement.ExplosiveEnhancement;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraft.core.registries.Registries;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ExplosiveParticles {
 
-    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, ExplosiveEnhancement.MOD_ID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(Registries.PARTICLE_TYPE, ExplosiveEnhancement.MOD_ID);
 
     public static final RegistryObject<SimpleParticleType> BLASTWAVE = register("blastwave");
     public static final RegistryObject<SimpleParticleType> FIREBALL = register("fireball");
@@ -24,7 +24,7 @@ public class ExplosiveParticles {
     public static final RegistryObject<SimpleParticleType> UNDERWATERSPARKS = register("underwatersparks");
     public static final RegistryObject<SimpleParticleType> EMPTY = register("empty");
 
-    public static void init(IEventBus modBus) {
+    public static void init(BusGroup modBus) {
         PARTICLES.register(modBus);
     }
 

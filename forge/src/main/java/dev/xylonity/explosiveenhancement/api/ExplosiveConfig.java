@@ -2,7 +2,6 @@ package dev.xylonity.explosiveenhancement.api;
 
 import dev.xylonity.explosiveenhancement.ExplosiveHandler;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
 
 public class ExplosiveConfig {
 

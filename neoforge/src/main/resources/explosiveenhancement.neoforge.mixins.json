@@ -3,7 +3,10 @@
   "minVersion": "0.8",
   "package": "dev.xylonity.explosiveenhancement.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "ExplosionPacketMixin",
+    "ServerExplosionAccessor"
+  ],
   "client": [
     "ExplosionMixin"
   ],
