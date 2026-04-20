@@ -48,4 +48,4 @@ plugins {
 rootProject.name = 'Explosive-Enhancement-Reforged'
 include('common')
 include('neoforge')
-include('forge')
+//include('forge')

@@ -17,9 +17,9 @@ public class UnderwaterBlastwaveParticle extends BlastWaveParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick) {
+    protected int getLightCoords(float a) {
         BlockPos blockPos = BlockPos.containing(this.x, this.y, this.z);
-        return ExplosiveValues.emissiveWaterExplosion ? 15728880 : this.level.hasChunkAt(blockPos) ? LevelRenderer.getLightColor(this.level, blockPos) : 0;
+        return ExplosiveValues.emissiveWaterExplosion ? 15728880 : this.level.hasChunkAt(blockPos) ? LevelRenderer.getLightCoords(this.level, blockPos) : 0;
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {

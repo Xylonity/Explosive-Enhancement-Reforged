@@ -87,18 +87,17 @@ public class SmokeParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float tint) {
+    protected int getLightCoords(float tint) {
         if (ExplosiveValues.emissiveExplosion && this.age <= this.lifetime * 0.12F) {
             return 15728880;
         }
         else if (ExplosiveValues.emissiveExplosion && this.age <= this.lifetime * 0.17F) {
-            int base = super.getLightColor(tint);
+            int base = super.getLightCoords(tint);
             return Mth.clamp(base + this.age + 30, base, 15728880);
         }
         else {
-            return super.getLightColor(tint);
+            return super.getLightCoords(tint);
         }
-
     }
 
     private static boolean almost(double a, double b) {

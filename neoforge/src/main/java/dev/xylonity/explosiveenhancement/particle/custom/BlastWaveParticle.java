@@ -7,7 +7,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.state.QuadParticleRenderState;
+import net.minecraft.client.renderer.state.level.QuadParticleRenderState;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import org.joml.Quaternionf;
@@ -38,8 +38,8 @@ public class BlastWaveParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick) {
-        return ExplosiveValues.emissiveExplosion ? 15728880 : super.getLightColor(partialTick);
+    protected int getLightCoords(float a) {
+        return ExplosiveValues.emissiveExplosion ? 15728880 : super.getLightCoords(a);
     }
 
     @Override

@@ -53,8 +53,8 @@ public class ShockwaveParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick) {
-        return ExplosiveValues.emissiveWaterExplosion ? 15728880 : super.getLightColor(partialTick);
+    protected int getLightCoords(float a) {
+        return ExplosiveValues.emissiveWaterExplosion ? 15728880 : super.getLightCoords(a);
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {

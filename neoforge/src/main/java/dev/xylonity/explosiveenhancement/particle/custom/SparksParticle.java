@@ -52,8 +52,8 @@ public class SparksParticle extends SingleQuadParticle {
     }
 
     @Override
-    protected int getLightColor(float partialTick) {
-        return ExplosiveValues.emissiveExplosion ? 15728880 : super.getLightColor(partialTick);
+    protected int getLightCoords(float a) {
+        return ExplosiveValues.emissiveExplosion ? 15728880 : super.getLightCoords(a);
     }
 
     public static class Provider implements ParticleProvider<SimpleParticleType> {
