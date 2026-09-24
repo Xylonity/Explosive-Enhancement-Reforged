@@ -3,6 +3,7 @@ package dev.xylonity.explosiveenhancement.mixin;
 import dev.xylonity.explosiveenhancement.ExplosiveEnhancement;
 import dev.xylonity.explosiveenhancement.api.ExplosiveConfig;
 import dev.xylonity.explosiveenhancement.config.ExplosiveValues;
+import dev.xylonity.explosiveenhancement.network.ExplosionSourceTracker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Explosion;
@@ -26,6 +27,10 @@ public abstract class ExplosionMixin {
 
     @ModifyVariable(method = "finalizeExplosion", at = @At("HEAD"), argsOnly = true)
     private boolean replaceExplosionParticles(boolean spawnParticles) {
+        if (spawnParticles && this.level.isClientSide && ExplosionSourceTracker.isBlacklisted(this.x, this.y, this.z)) {
+            return spawnParticles;
+        }
+
         if (!spawnParticles || !ExplosiveValues.modEnabled || this.radius <= 0) {
             return spawnParticles;
         }
