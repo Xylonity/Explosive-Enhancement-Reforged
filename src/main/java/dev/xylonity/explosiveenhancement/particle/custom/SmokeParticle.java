@@ -1,9 +1,9 @@
 package dev.xylonity.explosiveenhancement.particle.custom;
 
 import dev.xylonity.explosiveenhancement.config.ExplosiveValues;
+import dev.xylonity.explosiveenhancement.particle.ExplosiveParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -12,28 +12,15 @@ public class SmokeParticle extends TextureSheetParticle {
 
     private final SpriteSet sprites;
 
-    SmokeParticle(ClientLevel world, double x, double y, double z, SpriteSet spriteProvider, double velX, double velY, double velZ) {
+    SmokeParticle(ClientLevel world, double x, double y, double z, SpriteSet spriteProvider, float scale, double velX, double velY, double velZ) {
         super(world, x, y, z);
         this.friction = 0.6F;
         this.sprites = spriteProvider;
-        this.lifetime = this.random.nextInt(35) + 1;
-        if(velZ == 0) {
-            quadSize = (float) velX * 0.25f;
-            this.lifetime += (int) (velX * this.random.nextInt(3, 22));
-            this.xd = 0;
-            this.zd = 0;
-        } else if(velX == 0.15 || velX == -0.15) {
-            quadSize = (float) velZ * 0.25f;
-            this.lifetime += (int) (velZ * this.random.nextInt(3, 22));
-            this.xd = velX * (velZ * 0.5);
-            this.zd = 0;
-        } else if(velZ == 0.15 || velZ == -0.15) {
-            quadSize = (float) velX * 0.25f;
-            this.lifetime += (int) (velX * this.random.nextInt(3, 22));
-            this.xd = 0;
-            this.zd = velZ * (velX * 0.5);
-        }
-        this.yd = velY / 1.85;
+        this.quadSize = scale * 0.25F;
+        this.lifetime = this.random.nextInt(35) + 1 + (int) (scale * this.random.nextInt(3, 22));
+        this.xd = velX;
+        this.yd = velY;
+        this.zd = velZ;
         this.gravity = 3.0E-6F;
         this.hasPhysics = true;
         this.setSpriteFromAge(spriteProvider);
@@ -45,15 +32,18 @@ public class SmokeParticle extends TextureSheetParticle {
         this.zo = this.z;
         if (this.age++ >= this.lifetime) {
             this.remove();
-        } else {
+        }
+        else {
             this.setSpriteFromAge(this.sprites);
             if (this.age == 12) {
                 this.xd = 0;
                 this.yd = 0.05;
                 this.zd = 0;
             }
+
             this.move(this.xd, this.yd, this.zd);
         }
+
     }
 
     @Override
@@ -65,25 +55,28 @@ public class SmokeParticle extends TextureSheetParticle {
     protected int getLightColor(float tint) {
         if(ExplosiveValues.emissiveExplosion && this.age <= this.lifetime * 0.12) {
             return 15728880;
-        } else if (ExplosiveValues.emissiveExplosion && this.age <= this.lifetime * 0.17) {
+        }
+        else if (ExplosiveValues.emissiveExplosion && this.age <= this.lifetime * 0.17) {
             return Mth.clamp(super.getLightColor(tint) + this.age + 30, super.getLightColor(tint), 15728880);
-        } else {
+        }
+        else {
             return super.getLightColor(tint);
         }
+
     }
     @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
+    public static class Provider implements ParticleProvider<ExplosiveParticleOptions> {
+
         private final SpriteSet sprites;
 
         public Provider(SpriteSet spriteSet) {
             this.sprites = spriteSet;
         }
 
-        public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
-                                       double x, double y, double z,
-                                       double dx, double dy, double dz) {
-            return new SmokeParticle(level, x, y, z, this.sprites, dx, dy, dz);
+        public Particle createParticle(ExplosiveParticleOptions options, ClientLevel level, double x, double y, double z, double dx, double dy, double dz) {
+            return new SmokeParticle(level, x, y, z, this.sprites, options.scale(), dx, dy, dz);
         }
+
     }
 
 }

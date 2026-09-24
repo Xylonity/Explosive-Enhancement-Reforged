@@ -11,8 +11,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Explosion.class)
 public abstract class ExplosionMixin {
@@ -22,25 +21,27 @@ public abstract class ExplosionMixin {
     @Shadow @Final private double y;
     @Shadow @Final private double z;
     @Shadow @Final private float radius;
-    private boolean isUnderWater = false;
+
     @Shadow public abstract boolean interactsWithBlocks();
 
-    @Inject(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"), cancellable = true)
-    private void finalizeExplosion(boolean pSpawnParticles, CallbackInfo ci) {
-        if (ExplosiveValues.modEnabled) {
-            if (ExplosiveValues.debugLogs) {
-                ExplosiveEnhancement.LOGGER.info("finalizeExplosion has been called!");
-            }
-            BlockPos pos = BlockPos.containing(this.x, this.y, this.z);
-            if (ExplosiveValues.underwaterExplosions && this.level.getFluidState(pos).is(FluidTags.WATER)) {
-                isUnderWater = true;
-                if (ExplosiveValues.debugLogs) {
-                    ExplosiveEnhancement.LOGGER.info("particle is underwater!");
-                }
-            }
-            ExplosiveConfig.spawnParticles(level, x, y, z, radius, isUnderWater, interactsWithBlocks());
-            ci.cancel();
+    @ModifyVariable(method = "finalizeExplosion", at = @At("HEAD"), argsOnly = true)
+    private boolean replaceExplosionParticles(boolean spawnParticles) {
+        if (!spawnParticles || !ExplosiveValues.modEnabled || this.radius <= 0) {
+            return spawnParticles;
         }
+
+        if (ExplosiveValues.debugLogs) {
+            ExplosiveEnhancement.LOGGER.info("finalizeExplosion has been called!");
+        }
+
+        final boolean isUnderWater = ExplosiveValues.underwaterExplosions && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER);
+        if (isUnderWater && ExplosiveValues.debugLogs) {
+            ExplosiveEnhancement.LOGGER.info("particle is underwater!");
+        }
+
+        ExplosiveConfig.spawnParticles(this.level, this.x, this.y, this.z, this.radius, isUnderWater, this.interactsWithBlocks());
+
+        return false;
     }
 
 }
