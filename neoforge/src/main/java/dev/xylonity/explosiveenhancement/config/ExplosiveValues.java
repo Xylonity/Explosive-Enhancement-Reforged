@@ -1,6 +1,12 @@
 package dev.xylonity.explosiveenhancement.config;
 
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.event.config.ModConfigEvent;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ExplosiveValues {
 
@@ -30,6 +36,7 @@ public class ExplosiveValues {
     public static boolean emissiveExplosion = ExplosiveEnhancementConfig.emissiveExplosion.getDefault();
     public static boolean emissiveWaterExplosion = ExplosiveEnhancementConfig.emissiveWaterExplosion.getDefault();
     public static boolean alwaysShow = ExplosiveEnhancementConfig.alwaysShow.getDefault();
+    public static Set<ResourceLocation> entityBlacklist = toEntityIds(ExplosiveEnhancementConfig.entityBlacklist.getDefault());
     public static boolean debugLogs = ExplosiveEnhancementConfig.debugLogs.getDefault();
 
     public static void onConfigLoad(ModConfigEvent event) {
@@ -66,7 +73,12 @@ public class ExplosiveValues {
         emissiveExplosion = ExplosiveEnhancementConfig.emissiveExplosion.get();
         emissiveWaterExplosion = ExplosiveEnhancementConfig.emissiveWaterExplosion.get();
         alwaysShow = ExplosiveEnhancementConfig.alwaysShow.get();
+        entityBlacklist = toEntityIds(ExplosiveEnhancementConfig.entityBlacklist.get());
         debugLogs = ExplosiveEnhancementConfig.debugLogs.get();
+    }
+
+    private static Set<ResourceLocation> toEntityIds(List<? extends String> ids) {
+        return ids.stream().map(ResourceLocation::tryParse).filter(Objects::nonNull).collect(Collectors.toUnmodifiableSet());
     }
 
 }

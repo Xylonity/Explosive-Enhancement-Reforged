@@ -1,9 +1,14 @@
 package dev.xylonity.explosiveenhancement.config;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Provides auxiliary configuration values as a contingency mechanism, in the event that
@@ -41,6 +46,11 @@ public class ExplosiveValues {
     public static boolean emissiveExplosion = V ? ExplosiveEnhancementConfig.emissiveExplosion.get() : true;
     public static boolean emissiveWaterExplosion = V ? ExplosiveEnhancementConfig.emissiveWaterExplosion.get() : true;
     public static boolean alwaysShow = V ? ExplosiveEnhancementConfig.alwaysShow.get() : false;
+    public static Set<ResourceLocation> entityBlacklist = V ? toEntityIds(ExplosiveEnhancementConfig.entityBlacklist.get()) : Set.of();
     public static boolean debugLogs = V ? ExplosiveEnhancementConfig.debugLogs.get() : false;
+
+    private static Set<ResourceLocation> toEntityIds(List<? extends String> ids) {
+        return ids.stream().map(ResourceLocation::tryParse).filter(Objects::nonNull).collect(Collectors.toUnmodifiableSet());
+    }
 
 }

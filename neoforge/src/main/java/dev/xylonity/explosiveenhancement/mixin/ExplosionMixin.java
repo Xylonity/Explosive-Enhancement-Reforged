@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import dev.xylonity.explosiveenhancement.ExplosiveEnhancement;
 import dev.xylonity.explosiveenhancement.api.ExplosiveConfig;
 import dev.xylonity.explosiveenhancement.config.ExplosiveValues;
+import dev.xylonity.explosiveenhancement.network.ExplosionSourceTracker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,6 +28,10 @@ public abstract class ExplosionMixin {
 
     @WrapWithCondition(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V"))
     private boolean replaceExplosionParticles(Level level, ParticleOptions particle, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        if (level.isClientSide() && ExplosionSourceTracker.isBlacklisted(x, y, z)) {
+            return true;
+        }
+
         if (!ExplosiveValues.modEnabled || this.radius <= 0) {
             return true;
         }

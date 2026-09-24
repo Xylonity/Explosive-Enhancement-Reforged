@@ -26,5 +26,6 @@
   "explosiveenhancement.configuration.emissiveExplosion": "Emissive Explosions",
   "explosiveenhancement.configuration.emissiveWaterExplosion": "Emissive Underwater Explosions",
   "explosiveenhancement.configuration.alwaysShow": "Always Show",
+  "explosiveenhancement.configuration.entityBlacklist": "Entity Blacklist",
   "explosiveenhancement.configuration.debugLogs": "Debug Logs"
 }

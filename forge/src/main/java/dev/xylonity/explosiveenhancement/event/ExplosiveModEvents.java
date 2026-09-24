@@ -1,0 +1,17 @@
+package dev.xylonity.explosiveenhancement.event;
+
+import dev.xylonity.explosiveenhancement.ExplosiveEnhancement;
+import dev.xylonity.explosiveenhancement.network.ExplosiveNetwork;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+
+@Mod.EventBusSubscriber(modid = ExplosiveEnhancement.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class ExplosiveModEvents {
+
+    @SubscribeEvent
+    public static void onCommonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(ExplosiveNetwork::register);
+    }
+
+}

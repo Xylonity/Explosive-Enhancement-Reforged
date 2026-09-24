@@ -1,6 +1,9 @@
 package dev.xylonity.explosiveenhancement.config;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
+
+import java.util.List;
 
 public class ExplosiveEnhancementConfig {
 
@@ -33,6 +36,7 @@ public class ExplosiveEnhancementConfig {
     public static final ForgeConfigSpec.BooleanValue emissiveExplosion ;
     public static final ForgeConfigSpec.BooleanValue emissiveWaterExplosion ;
     public static final ForgeConfigSpec.BooleanValue alwaysShow ;
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> entityBlacklist ;
     public static final ForgeConfigSpec.BooleanValue debugLogs ;
 
     static {
@@ -64,6 +68,7 @@ public class ExplosiveEnhancementConfig {
         emissiveExplosion = BUILDER.comment("Enable emissive explosion effects").define("emissiveExplosion", true);
         emissiveWaterExplosion = BUILDER.comment("Enable emissive water explosion effects").define("emissiveWaterExplosion", true);
         alwaysShow = BUILDER.comment("Always show explosion effects").define("alwaysShow", true);
+        entityBlacklist = BUILDER.comment("Entities whose explosions are ignored (for example: [\"minecraft:creeper\"])").defineListAllowEmpty("entityBlacklist", List.of(), entry -> entry instanceof String id && ResourceLocation.tryParse(id) != null);
         debugLogs = BUILDER.comment("Enable debug logs").define("debugLogs", false);
 
         BUILDER.pop();
