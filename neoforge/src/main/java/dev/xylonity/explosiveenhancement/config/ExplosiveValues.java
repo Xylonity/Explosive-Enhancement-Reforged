@@ -1,43 +1,66 @@
 package dev.xylonity.explosiveenhancement.config;
 
-import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.fml.event.config.ModConfigEvent;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-/**
- * Provides auxiliary configuration values as a contingency mechanism, in the event that
- * the configuration file is not detected. This ensures the mod can continue operating
- * under predefined conditions while also supporting dynamic hot-reloading capabilities.
- */
 public class ExplosiveValues {
 
-    static Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("explosiveenhancement.toml");
-    private static final boolean V = Files.exists(CONFIG_PATH);
+    public static boolean showBlastWave = ExplosiveEnhancementConfig.showBlastWave.getDefault();
+    public static boolean showFireball = ExplosiveEnhancementConfig.showFireball.getDefault();
+    public static boolean showMushroomCloud = ExplosiveEnhancementConfig.showMushroomCloud.getDefault();
+    public static boolean showSparks = ExplosiveEnhancementConfig.showSparks.getDefault();
+    public static double sparkSize = ExplosiveEnhancementConfig.sparkSize.getDefault();
+    public static double sparkOpacity = ExplosiveEnhancementConfig.sparkOpacity.getDefault();
+    public static boolean showDefaultExplosion = ExplosiveEnhancementConfig.showDefaultExplosion.getDefault();
+    public static boolean underwaterExplosions = ExplosiveEnhancementConfig.underwaterExplosions.getDefault();
+    public static boolean showShockwave = ExplosiveEnhancementConfig.showShockwave.getDefault();
+    public static boolean showUnderwaterBlastWave = ExplosiveEnhancementConfig.showUnderwaterBlastWave.getDefault();
+    public static int bubbleAmount = ExplosiveEnhancementConfig.bubbleAmount.getDefault();
+    public static boolean showUnderwaterSparks = ExplosiveEnhancementConfig.showUnderwaterSparks.getDefault();
+    public static double underwaterSparkSize = ExplosiveEnhancementConfig.underwaterSparkSize.getDefault();
+    public static double underwaterSparkOpacity = ExplosiveEnhancementConfig.underwaterSparkOpacity.getDefault();
+    public static boolean showDefaultExplosionUnderwater = ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.getDefault();
+    public static boolean dynamicSize = ExplosiveEnhancementConfig.dynamicSize.getDefault();
+    public static boolean dynamicUnderwater = ExplosiveEnhancementConfig.dynamicUnderwater.getDefault();
+    public static boolean attemptBetterSmallExplosions = ExplosiveEnhancementConfig.attemptBetterSmallExplosions.getDefault();
+    public static double smallExplosionYOffset = ExplosiveEnhancementConfig.smallExplosionYOffset.getDefault();
+    public static boolean modEnabled = ExplosiveEnhancementConfig.modEnabled.getDefault();
+    public static boolean emissiveExplosion = ExplosiveEnhancementConfig.emissiveExplosion.getDefault();
+    public static boolean emissiveWaterExplosion = ExplosiveEnhancementConfig.emissiveWaterExplosion.getDefault();
+    public static boolean alwaysShow = ExplosiveEnhancementConfig.alwaysShow.getDefault();
+    public static boolean debugLogs = ExplosiveEnhancementConfig.debugLogs.getDefault();
 
-    public static boolean showBlastWave = V ? ExplosiveEnhancementConfig.showBlastWave.get() : true;
-    public static boolean showFireball = V ? ExplosiveEnhancementConfig.showFireball.get() : true;
-    public static boolean showMushroomCloud = V ? ExplosiveEnhancementConfig.showMushroomCloud.get() : true;
-    public static boolean showSparks = V ? ExplosiveEnhancementConfig.showSparks.get() : true;
-    public static double sparkSize = V ? ExplosiveEnhancementConfig.sparkSize.get() : 5.3;
-    public static double sparkOpacity = V ? ExplosiveEnhancementConfig.sparkOpacity.get() : 0.70;
-    public static boolean showDefaultExplosion = V ? ExplosiveEnhancementConfig.showDefaultExplosion.get() : false;
-    public static boolean underwaterExplosions = V ? ExplosiveEnhancementConfig.underwaterExplosions.get() : true;
-    public static boolean showShockwave = V ? ExplosiveEnhancementConfig.showShockwave.get() : true;
-    public static boolean showUnderwaterBlastWave = V ? ExplosiveEnhancementConfig.showUnderwaterBlastWave.get() : true;
-    public static int bubbleAmount = V ? ExplosiveEnhancementConfig.bubbleAmount.get() : 50;
-    public static boolean showUnderwaterSparks = V ? ExplosiveEnhancementConfig.showUnderwaterSparks.get() : false;
-    public static double underwaterSparkSize = V ? ExplosiveEnhancementConfig.underwaterSparkSize.get() : 4.0;
-    public static double underwaterSparkOpacity = V ? ExplosiveEnhancementConfig.underwaterSparkOpacity.get() : 0.30;
-    public static boolean showDefaultExplosionUnderwater = V ? ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.get() : false;
-    public static boolean dynamicSize = V ? ExplosiveEnhancementConfig.dynamicSize.get() : true;
-    public static boolean dynamicUnderwater = V ? ExplosiveEnhancementConfig.dynamicUnderwater.get() : true;
-    public static boolean attemptBetterSmallExplosions = V ? ExplosiveEnhancementConfig.attemptBetterSmallExplosions.get() : true;
-    public static double smallExplosionYOffset = V ? ExplosiveEnhancementConfig.smallExplosionYOffset.get() : -0.5;
-    public static boolean modEnabled = V ? ExplosiveEnhancementConfig.modEnabled.get() : true;
-    public static boolean emissiveExplosion = V ? ExplosiveEnhancementConfig.emissiveExplosion.get() : true;
-    public static boolean emissiveWaterExplosion = V ? ExplosiveEnhancementConfig.emissiveWaterExplosion.get() : true;
-    public static boolean alwaysShow = V ? ExplosiveEnhancementConfig.alwaysShow.get() : false;
-    public static boolean debugLogs = V ? ExplosiveEnhancementConfig.debugLogs.get() : false;
+    public static void onConfigLoad(ModConfigEvent event) {
+        if (event.getConfig().getSpec() == ExplosiveEnhancementConfig.SPEC) {
+            reload();
+        }
+
+    }
+
+    private static void reload() {
+        showBlastWave = ExplosiveEnhancementConfig.showBlastWave.get();
+        showFireball = ExplosiveEnhancementConfig.showFireball.get();
+        showMushroomCloud = ExplosiveEnhancementConfig.showMushroomCloud.get();
+        showSparks = ExplosiveEnhancementConfig.showSparks.get();
+        sparkSize = ExplosiveEnhancementConfig.sparkSize.get();
+        sparkOpacity = ExplosiveEnhancementConfig.sparkOpacity.get();
+        showDefaultExplosion = ExplosiveEnhancementConfig.showDefaultExplosion.get();
+        underwaterExplosions = ExplosiveEnhancementConfig.underwaterExplosions.get();
+        showShockwave = ExplosiveEnhancementConfig.showShockwave.get();
+        showUnderwaterBlastWave = ExplosiveEnhancementConfig.showUnderwaterBlastWave.get();
+        bubbleAmount = ExplosiveEnhancementConfig.bubbleAmount.get();
+        showUnderwaterSparks = ExplosiveEnhancementConfig.showUnderwaterSparks.get();
+        underwaterSparkSize = ExplosiveEnhancementConfig.underwaterSparkSize.get();
+        underwaterSparkOpacity = ExplosiveEnhancementConfig.underwaterSparkOpacity.get();
+        showDefaultExplosionUnderwater = ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.get();
+        dynamicSize = ExplosiveEnhancementConfig.dynamicSize.get();
+        dynamicUnderwater = ExplosiveEnhancementConfig.dynamicUnderwater.get();
+        attemptBetterSmallExplosions = ExplosiveEnhancementConfig.attemptBetterSmallExplosions.get();
+        smallExplosionYOffset = ExplosiveEnhancementConfig.smallExplosionYOffset.get();
+        modEnabled = ExplosiveEnhancementConfig.modEnabled.get();
+        emissiveExplosion = ExplosiveEnhancementConfig.emissiveExplosion.get();
+        emissiveWaterExplosion = ExplosiveEnhancementConfig.emissiveWaterExplosion.get();
+        alwaysShow = ExplosiveEnhancementConfig.alwaysShow.get();
+        debugLogs = ExplosiveEnhancementConfig.debugLogs.get();
+    }
 
 }
