@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "client": [
-    "ExplosionMixin",
-    "ParticleManagerMixin"
+    "ExplosionMixin"
   ],
   "server": [],
   "injectors": {
