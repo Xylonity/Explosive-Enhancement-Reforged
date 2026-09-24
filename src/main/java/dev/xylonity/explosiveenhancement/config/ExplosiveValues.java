@@ -32,6 +32,9 @@ public class ExplosiveValues {
     public static boolean showDefaultExplosionUnderwater = V ? ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.get() : false;
     public static boolean dynamicSize = V ? ExplosiveEnhancementConfig.dynamicSize.get() : true;
     public static boolean dynamicUnderwater = V ? ExplosiveEnhancementConfig.dynamicUnderwater.get() : true;
+    public static double explosionScale = V ? ExplosiveEnhancementConfig.explosionScale.get() : 1.0;
+    public static double explosionDuration = V ? ExplosiveEnhancementConfig.explosionDuration.get() : 1.0;
+    public static double explosionOpacity = V ? ExplosiveEnhancementConfig.explosionOpacity.get() : 1.0;
     public static boolean attemptBetterSmallExplosions = V ? ExplosiveEnhancementConfig.attemptBetterSmallExplosions.get() : true;
     public static double smallExplosionYOffset = V ? ExplosiveEnhancementConfig.smallExplosionYOffset.get() : -0.5;
     public static boolean modEnabled = V ? ExplosiveEnhancementConfig.modEnabled.get() : true;

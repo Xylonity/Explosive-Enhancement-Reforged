@@ -16,9 +16,9 @@ public class UnderwaterSparksParticle extends TextureSheetParticle {
         this.sprites = sprites;
         final float shockwaveSize = scale * 1.25F;
         this.quadSize = (float) (ExplosiveValues.underwaterSparkSize * shockwaveSize * 0.25F);
-        this.lifetime = 5 + (int) (shockwaveSize / 5);
+        this.lifetime = Math.max(1, (int) ((5 + shockwaveSize / 5) * ExplosiveValues.explosionDuration));
         this.setParticleSpeed(0D, 0D, 0D);
-        this.alpha = (float) ExplosiveValues.underwaterSparkOpacity;
+        this.alpha = (float) (ExplosiveValues.underwaterSparkOpacity * ExplosiveValues.explosionOpacity);
         this.setSpriteFromAge(sprites);
     }
 

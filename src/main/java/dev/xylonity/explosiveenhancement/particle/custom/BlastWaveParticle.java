@@ -22,7 +22,8 @@ public class BlastWaveParticle extends TextureSheetParticle {
         super(world, x, y + 0.5, z, 0.0, 0.0, 0.0);
         this.quadSize = scale * 1.75F;
         this.setParticleSpeed(0D, 0D, 0D);
-        this.lifetime = 15 + (int) (this.quadSize / 5);
+        this.lifetime = Math.max(1, (int) ((15 + this.quadSize / 5) * ExplosiveValues.explosionDuration));
+        this.alpha = (float) ExplosiveValues.explosionOpacity;
         this.sprites = sprites;
         this.setSpriteFromAge(sprites);
     }

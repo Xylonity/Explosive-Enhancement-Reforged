@@ -19,7 +19,8 @@ public class FireballParticle extends TextureSheetParticle {
         this.sprites = spriteProvider;
         this.scale = scale;
         this.quadSize = scale * 1.25F;
-        this.lifetime = 9 + (int) (this.quadSize / 5);
+        this.lifetime = Math.max(1, (int) ((9 + this.quadSize / 5) * ExplosiveValues.explosionDuration));
+        this.alpha = (float) ExplosiveValues.explosionOpacity;
         this.setParticleSpeed(0D, 0D, 0D);
         this.setSpriteFromAge(spriteProvider);
     }
