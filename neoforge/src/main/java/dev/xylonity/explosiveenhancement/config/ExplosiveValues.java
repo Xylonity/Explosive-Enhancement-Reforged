@@ -21,6 +21,9 @@ public class ExplosiveValues {
     public static boolean showDefaultExplosionUnderwater = ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.getDefault();
     public static boolean dynamicSize = ExplosiveEnhancementConfig.dynamicSize.getDefault();
     public static boolean dynamicUnderwater = ExplosiveEnhancementConfig.dynamicUnderwater.getDefault();
+    public static double explosionScale = ExplosiveEnhancementConfig.explosionScale.getDefault();
+    public static double explosionDuration = ExplosiveEnhancementConfig.explosionDuration.getDefault();
+    public static double explosionOpacity = ExplosiveEnhancementConfig.explosionOpacity.getDefault();
     public static boolean attemptBetterSmallExplosions = ExplosiveEnhancementConfig.attemptBetterSmallExplosions.getDefault();
     public static double smallExplosionYOffset = ExplosiveEnhancementConfig.smallExplosionYOffset.getDefault();
     public static boolean modEnabled = ExplosiveEnhancementConfig.modEnabled.getDefault();
@@ -54,6 +57,9 @@ public class ExplosiveValues {
         showDefaultExplosionUnderwater = ExplosiveEnhancementConfig.showDefaultExplosionUnderwater.get();
         dynamicSize = ExplosiveEnhancementConfig.dynamicSize.get();
         dynamicUnderwater = ExplosiveEnhancementConfig.dynamicUnderwater.get();
+        explosionScale = ExplosiveEnhancementConfig.explosionScale.get();
+        explosionDuration = ExplosiveEnhancementConfig.explosionDuration.get();
+        explosionOpacity = ExplosiveEnhancementConfig.explosionOpacity.get();
         attemptBetterSmallExplosions = ExplosiveEnhancementConfig.attemptBetterSmallExplosions.get();
         smallExplosionYOffset = ExplosiveEnhancementConfig.smallExplosionYOffset.get();
         modEnabled = ExplosiveEnhancementConfig.modEnabled.get();

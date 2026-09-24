@@ -16,9 +16,9 @@ public class SparksParticle extends TextureSheetParticle {
         this.sprites = spriteProvider;
         final float fireballSize = scale * 1.25F;
         this.quadSize = (float) (ExplosiveValues.sparkSize * fireballSize * 0.25F);
-        this.lifetime = 5 + (int) (fireballSize / 5);
+        this.lifetime = Math.max(1, (int) ((5 + fireballSize / 5) * ExplosiveValues.explosionDuration));
         this.setParticleSpeed(0D, 0D, 0D);
-        this.alpha = (float) ExplosiveValues.sparkOpacity;
+        this.alpha = (float) (ExplosiveValues.sparkOpacity * ExplosiveValues.explosionOpacity);
         this.setSpriteFromAge(spriteProvider);
     }
 

@@ -28,16 +28,18 @@ public class ExplosiveHandler {
         y = ExplosiveValues.attemptBetterSmallExplosions && power == 1 ? y + ExplosiveValues.smallExplosionYOffset : y;
         isImportant = isImportant || ExplosiveValues.alwaysShow;
 
+        final float scale = power * (float) ExplosiveValues.explosionScale;
+
         if (isUnderWater) {
             if (ExplosiveValues.showUnderwaterBlastWave) {
-                world.addParticle(ExplosiveParticles.UNDERWATERBLASTWAVE.get().withScale(power), isImportant, x, y + 0.5, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.UNDERWATERBLASTWAVE.get().withScale(scale), isImportant, x, y + 0.5, z, 0, 0, 0);
             }
 
             if (ExplosiveValues.showShockwave) {
-                world.addParticle(ExplosiveParticles.SHOCKWAVE.get().withScale(power), isImportant, x, y + 0.5, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.SHOCKWAVE.get().withScale(scale), isImportant, x, y + 0.5, z, 0, 0, 0);
             }
             else if (ExplosiveValues.showUnderwaterSparks) {
-                world.addParticle(ExplosiveParticles.BLANK_SHOCKWAVE.get().withScale(power), isImportant, x, y + 0.5, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.BLANK_SHOCKWAVE.get().withScale(scale), isImportant, x, y + 0.5, z, 0, 0, 0);
             }
 
             for (int total = ExplosiveValues.bubbleAmount; total >= 1; total--) {
@@ -55,18 +57,18 @@ public class ExplosiveHandler {
             }
 
             if (ExplosiveValues.showBlastWave) {
-                world.addParticle(ExplosiveParticles.BLASTWAVE.get().withScale(power), isImportant, x, y, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.BLASTWAVE.get().withScale(scale), isImportant, x, y, z, 0, 0, 0);
             }
 
             if (ExplosiveValues.showFireball) {
-                world.addParticle(ExplosiveParticles.FIREBALL.get().withScale(power), isImportant, x, y + 0.5, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.FIREBALL.get().withScale(scale), isImportant, x, y + 0.5, z, 0, 0, 0);
             }
             else if (ExplosiveValues.showSparks) {
-                world.addParticle(ExplosiveParticles.BLANK_FIREBALL.get().withScale(power), isImportant, x, y + 0.5, z, 0, 0, 0);
+                world.addParticle(ExplosiveParticles.BLANK_FIREBALL.get().withScale(scale), isImportant, x, y + 0.5, z, 0, 0, 0);
             }
 
             if (ExplosiveValues.showMushroomCloud) {
-                spawnMushroomCloud(world, x, y, z, power, isImportant);
+                spawnMushroomCloud(world, x, y, z, scale, isImportant);
             }
 
             if (ExplosiveValues.showDefaultExplosion) {
@@ -81,18 +83,18 @@ public class ExplosiveHandler {
 
     }
 
-    private static void spawnMushroomCloud(Level world, double x, double y, double z, float power, boolean isImportant) {
-        final double stem = power * 0.25 / 1.85;
-        final double rise = power * 0.4 / 1.85;
-        final double spread = power * 0.075;
+    private static void spawnMushroomCloud(Level world, double x, double y, double z, float scale, boolean isImportant) {
+        final double stem = scale * 0.25 / 1.85;
+        final double rise = scale * 0.4 / 1.85;
+        final double spread = scale * 0.075;
 
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, 0, stem, 0);
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, 0, rise, 0);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, 0, stem, 0);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, 0, rise, 0);
 
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, spread, rise, 0);
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, -spread, rise, 0);
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, 0, rise, spread);
-        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(power), isImportant, x, y, z, 0, rise, -spread);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, spread, rise, 0);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, -spread, rise, 0);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, 0, rise, spread);
+        world.addParticle(ExplosiveParticles.SMOKE.get().withScale(scale), isImportant, x, y, z, 0, rise, -spread);
     }
 
     private static void showDefaultParticles(Level world, double x, double y, double z, float power, boolean didDestroyBlocks, boolean isImportant) {

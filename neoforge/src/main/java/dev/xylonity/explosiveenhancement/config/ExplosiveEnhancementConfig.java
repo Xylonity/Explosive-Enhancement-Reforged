@@ -24,6 +24,9 @@ public class ExplosiveEnhancementConfig {
     public static final ModConfigSpec.BooleanValue showDefaultExplosionUnderwater ;
     public static final ModConfigSpec.BooleanValue dynamicSize ;
     public static final ModConfigSpec.BooleanValue dynamicUnderwater ;
+    public static final ModConfigSpec.DoubleValue explosionScale ;
+    public static final ModConfigSpec.DoubleValue explosionDuration ;
+    public static final ModConfigSpec.DoubleValue explosionOpacity ;
     public static final ModConfigSpec.BooleanValue attemptBetterSmallExplosions ;
     public static final ModConfigSpec.DoubleValue smallExplosionYOffset ;
     public static final ModConfigSpec.BooleanValue modEnabled ;
@@ -52,6 +55,9 @@ public class ExplosiveEnhancementConfig {
         showDefaultExplosionUnderwater = BUILDER.comment("Show default explosion effects underwater").define("showDefaultExplosionUnderwater", false);
         dynamicSize = BUILDER.comment("Enable dynamic explosion size").define("dynamicSize", true);
         dynamicUnderwater = BUILDER.comment("Enable dynamic underwater explosion size").define("dynamicUnderwater", true);
+        explosionScale = BUILDER.comment("Multiplier for the size of the explosion effects").defineInRange("explosionScale", 1.0, 0.0, 10.0);
+        explosionDuration = BUILDER.comment("Multiplier for how long the explosion effects last, lower values make them fade out faster").defineInRange("explosionDuration", 1.0, 0.0, 10.0);
+        explosionOpacity = BUILDER.comment("Opacity of the explosion effects, from 0 (invisible) to 1 (opaque). Sparks also keep their own opacity option on top of this").defineInRange("explosionOpacity", 1.0, 0.0, 1.0);
         attemptBetterSmallExplosions = BUILDER.comment("Attempt better small explosion effects").define("attemptBetterSmallExplosions", true);
         smallExplosionYOffset = BUILDER.comment("Y offset for small explosions").defineInRange("smallExplosionYOffset", -0.5, -Double.MAX_VALUE, Double.MAX_VALUE);
         modEnabled = BUILDER.comment("Enable the mod").define("modEnabled", true);
